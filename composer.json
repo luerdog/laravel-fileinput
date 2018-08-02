@@ -1,0 +1,28 @@
+{
+  "name": "luerdog/laravel-fileinput",
+  "description": "基于kartik-v/bootstrap-fileinput项目封装的图片上传简单调用",
+  "require": {
+    "kartik-v/bootstrap-fileinput": "^4.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Luerdog\\Fileinput\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Luerdog\\Fileinput\\FileinputServiceProvider"
+      ],
+      "aliases": {
+        "Fileinput": "Luerdog\\Fileinput\\FileinputFacade"
+      }
+    }
+  },
+  "authors": [
+    {
+      "name": "miya",
+      "email": "fangqishenderen@vip.qq.com"
+    }
+  ]
+}

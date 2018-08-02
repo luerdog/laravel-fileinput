@@ -47,11 +47,11 @@ class FileinputServiceProvider extends ServiceProvider
         //定义上传路由
         $router = app('router');
         //need add auth
-        $config = config('fileinput.group');
+        $config = config('fileinput.group',[]);
 
         //定义路由
         $router->group($config, function ($router) {
-            $router->any('/laravel-fileinput-server/server', config('fileinput.route'));
+            $router->any('/laravel-fileinput-server/server', config('fileinput.route'))->name('fileinput.server');
         });
     }
 

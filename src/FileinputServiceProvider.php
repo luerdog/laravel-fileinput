@@ -20,17 +20,12 @@ class FileinputServiceProvider extends ServiceProvider
         //发布视图模版
         $this->publishes([
             realpath(__DIR__ . '/../resources/views') => base_path('resources/views/vendor/Fileinput'),
-        ], 'view');
-
-        //发布fileinput资源
-        $this->publishes([
-            realpath(__DIR__ . '/../../../kartik-v/bootstrap-fileinput') => public_path() . '/laravel-fileinput',
-        ], 'assets');
+        ], 'laravel-fileinput-view');
 
         //定义多语言
         //根据系统配置 取得 local
         $locale = strtolower(config('app.locale'));
-        $file = "/laravel-fileinput/js/locals/$locale.js";
+        $file = "/laravel-fileinput/js/locales/$locale.js";
         $filePath = public_path() . $file;
 
         if (!\File::exists($filePath)) {
@@ -47,6 +42,9 @@ class FileinputServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //发布fileinput资源
+        $this->publishes([
+            realpath(__DIR__ . '/../../../kartik-v/bootstrap-fileinput') => public_path() . '/laravel-fileinput',
+        ], 'laravel-fileinput-assets');
     }
 }

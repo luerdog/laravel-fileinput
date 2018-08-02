@@ -35,7 +35,7 @@ class FileinputServiceProvider extends ServiceProvider
 
         if (!\File::exists($filePath)) {
             //Default is zh-cn
-            $file = "/laravel-fileinput/js/locals/zh.js";
+            $file = "/laravel-fileinput/js/locales/zh.js";
         }
         \View::share('FileinputLangFile', $file);
     }

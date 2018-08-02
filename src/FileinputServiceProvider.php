@@ -20,7 +20,17 @@ class FileinputServiceProvider extends ServiceProvider
         //发布视图模版
         $this->publishes([
             realpath(__DIR__ . '/../resources/views') => base_path('resources/views/vendor/Fileinput'),
-        ], 'laravel-fileinput-view');
+        ], 'laravel-fileinput-views');
+
+        //发布配置信息
+        $this->publishes([
+            realpath(__DIR__ . '/../config/') => base_path('config/'),
+        ], 'laravel-fileinput');
+
+        //发布fileinput资源
+        $this->publishes([
+            realpath(__DIR__ . '/../../../kartik-v/bootstrap-fileinput') => public_path() . '/laravel-fileinput',
+        ], 'laravel-fileinput');
 
         //定义多语言
         //根据系统配置 取得 local
@@ -29,10 +39,20 @@ class FileinputServiceProvider extends ServiceProvider
         $filePath = public_path() . $file;
 
         if (!\File::exists($filePath)) {
-            //Default is zh-cn
+            //Default is zh
             $file = "/laravel-fileinput/js/locales/zh.js";
         }
         \View::share('FileinputLangFile', $file);
+
+        //定义上传路由
+        $router = app('router');
+        //need add auth
+        $config = config('fileinput.group');
+
+        //定义路由
+        $router->group($config, function ($router) {
+            $router->any('/laravel-fileinput-server/server', config('fileinput.route'));
+        });
     }
 
     /**
@@ -42,9 +62,6 @@ class FileinputServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //发布fileinput资源
-        $this->publishes([
-            realpath(__DIR__ . '/../../../kartik-v/bootstrap-fileinput') => public_path() . '/laravel-fileinput',
-        ], 'laravel-fileinput-assets');
+
     }
 }

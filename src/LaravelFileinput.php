@@ -10,6 +10,6 @@ class LaravelFileinput
 
     public function test()
     {
-        return 'Fileinput';
+        return 'Fileinput , My First package~';
     }
 }
